@@ -18,8 +18,8 @@ lr_config = dict(
     warmup='linear',
     warmup_iters=500,
     warmup_ratio=0.001,
-    step=[170, 200])
-total_epochs = 210
+    step=[17, 20]) #[170, 200])
+total_epochs = 21 #210
 log_config = dict(
     interval=50,
     hooks=[dict(type='TextLoggerHook'),
@@ -40,7 +40,7 @@ model = dict(
     type='TopDown',
     pretrained=None,
     backbone=dict(
-        type='LiteHRNet',
+        type='myLiteHRNet',
         in_channels=3,
         extra=dict(
             stem=dict(stem_channels=32, out_channels=32, expand_ratio=1),
