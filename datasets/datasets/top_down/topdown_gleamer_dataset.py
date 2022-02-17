@@ -58,7 +58,7 @@ class TopDownGleamerDataset(TopDownCocoDataset):
         for img_id in self.img_ids:
             image_file = os.path.join(self.img_prefix, self.id2name[img_id])
             img_ann = self.coco.loadImgs(img_id)[0]
-            width = img_ann["widht"]
+            width = img_ann["width"]
             height = img_ann["height"]
             box = [0, 0, width, height]
             center, scale = self._xywh2cs(*box[:4])
