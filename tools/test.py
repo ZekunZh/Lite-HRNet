@@ -1,6 +1,7 @@
 import argparse
 import os
 import os.path as osp
+from pathlib import Path
 
 import mmcv
 import torch
@@ -81,8 +82,7 @@ def main():
     cfg.model.pretrained = None
     cfg.data.test.test_mode = True
 
-    args.work_dir = osp.join('./work_dirs',
-                             osp.splitext(osp.basename(args.config))[0])
+    args.work_dir = str(Path(args.out).resolve().parent)
     mmcv.mkdir_or_exist(osp.abspath(args.work_dir))
 
     # init distributed env first, since logger depends on the dist info.
