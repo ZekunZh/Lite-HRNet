@@ -21,7 +21,7 @@ lr_config = dict(
     step=[17, 20])  # [170, 200])
 total_epochs = 210
 log_config = dict(
-    interval=50,
+    interval=10,
     hooks=[dict(type='TextLoggerHook'),
            dict(type='TensorboardLoggerHook')])
 
@@ -76,7 +76,7 @@ model = dict(
     loss_pose=dict(type='JointsMSELoss', use_target_weight=True))
 
 data_cfg = dict(
-    image_size=[192, 256],
+    image_size=[192, 256],  # TODO: inverse image size since profile foot usually has width > height
     heatmap_size=[48, 64],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
@@ -157,10 +157,10 @@ test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
     samples_per_gpu=64,
-    workers_per_gpu=4,
+    workers_per_gpu=6,
     train=dict(
         type='TopDownGleamerDataset',
-        ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_test_coco.json',
+        ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_train_coco.json',
         img_prefix=f'{data_root}/test/',
         data_cfg=data_cfg,
         pipeline=train_pipeline),
@@ -174,6 +174,6 @@ data = dict(
         type='TopDownGleamerDataset',
         ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_test_coco.json',
         img_prefix=f'{data_root}/test/',
-        data_cfg=data_cfg,
-        pipeline=val_pipeline),
+        data_cfg=val_data_cfg,
+        pipeline=test_pipeline),
 )
