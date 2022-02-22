@@ -18,8 +18,8 @@ lr_config = dict(
     warmup='linear',
     warmup_iters=500,
     warmup_ratio=0.001,
-    step=[170, 200])
-total_epochs = 210
+    step=[17, 20])
+total_epochs = 21
 log_config = dict(
     interval=10,
     hooks=[dict(type='TextLoggerHook'),
@@ -76,8 +76,8 @@ model = dict(
     loss_pose=dict(type='JointsMSELoss', use_target_weight=True))
 
 data_cfg = dict(
-    image_size=[192, 256],  # TODO: inverse image size since profile foot usually has width > height
-    heatmap_size=[48, 64],
+    image_size=[384, 512], #[192, 256],  # TODO: inverse image size since profile foot usually has width > height
+    heatmap_size=[96, 128], #[48, 64],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -93,8 +93,8 @@ data_cfg = dict(
 )
 
 val_data_cfg = dict(
-    image_size=[192, 256],
-    heatmap_size=[48, 64],
+    image_size=[384, 512], #[192, 256],
+    heatmap_size=[96, 128], #[48, 64],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
