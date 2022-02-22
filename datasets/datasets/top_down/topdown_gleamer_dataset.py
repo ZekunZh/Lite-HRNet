@@ -93,7 +93,8 @@ class TopDownGleamerDataset(TopDownCocoDataset):
             'AP', 'AP .5', 'AP .75', 'AP (M)', 'AP (L)', 'AR', 'AR .5',
             'AR .75', 'AR (M)', 'AR (L)'
         ]
-
         info_str = list(zip(stats_names, coco_eval.stats))
-
         return info_str
+
+    def _do_gleamer_eval(self, res_file):
+        pass

@@ -82,7 +82,7 @@ def main():
     cfg.model.pretrained = None
     cfg.data.test.test_mode = True
 
-    args.work_dir = str(Path(args.out).resolve().parent)
+    args.work_dir = str(Path(args.out).resolve().parent) if args.out else "."
     mmcv.mkdir_or_exist(osp.abspath(args.work_dir))
 
     # init distributed env first, since logger depends on the dist info.
