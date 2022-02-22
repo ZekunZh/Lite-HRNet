@@ -12,8 +12,9 @@ from mmcv.utils import get_git_hash
 
 from mmpose import __version__
 from mmpose.apis import train_model
-from mmpose.datasets import build_dataset
+# from mmpose.datasets import build_dataset
 from models import build_posenet
+from datasets import build_dataset
 from mmpose.utils import collect_env, get_root_logger
 
 
