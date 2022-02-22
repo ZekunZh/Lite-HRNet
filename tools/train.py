@@ -3,6 +3,8 @@ import copy
 import os
 import os.path as osp
 import time
+import sys
+from pathlib import Path
 
 import mmcv
 import torch
@@ -11,10 +13,12 @@ from mmcv.runner import init_dist, set_random_seed
 from mmcv.utils import get_git_hash
 
 from mmpose import __version__
+from mmpose.utils import collect_env, get_root_logger
+
+sys.path.append(str(Path(__file__).parents[1].resolve()))
 from apis import train_model
 from models import build_posenet
 from datasets import build_dataset
-from mmpose.utils import collect_env, get_root_logger
 
 
 def parse_args():
