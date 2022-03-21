@@ -19,9 +19,9 @@ lr_config = dict(
     warmup_iters=500,
     warmup_ratio=0.001,
     # step=[170, 200],
-    step=[240, 280],
+    step=[340, 400],
 )
-total_epochs = 300
+total_epochs = 420
 log_config = dict(
     interval=10,
     hooks=[dict(type='TextLoggerHook'),
@@ -168,7 +168,7 @@ test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
     samples_per_gpu=64,
-    workers_per_gpu=4,
+    workers_per_gpu=16,
     train=dict(
         type='TopDownGleamerDataset',
         ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_train_coco.json',
