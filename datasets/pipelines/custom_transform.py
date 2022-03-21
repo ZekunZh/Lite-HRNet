@@ -5,7 +5,11 @@ from mmpose.datasets.builder import PIPELINES
 
 @PIPELINES.register_module()
 class TopDownGetRandomRotation90:
-    """Random rotations with +90/-90 degrees"""
+    """Random rotations with +90/-90 degrees
+
+    Args:
+        rot_prob (float): Probability of rotation. If rotation happens, we have equal proba for +90 and -90 degrees
+    """
 
     def __init__(self, rot_prob=0.5):
         self.rot_prob = rot_prob
