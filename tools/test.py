@@ -1,6 +1,7 @@
 import argparse
 import os
 import os.path as osp
+import sys
 from pathlib import Path
 
 import mmcv
@@ -12,8 +13,11 @@ from mmcv.runner import get_dist_info, init_dist, load_checkpoint
 
 from mmpose.apis import multi_gpu_test, single_gpu_test
 from mmpose.core import wrap_fp16_model
-from mmpose.datasets import build_dataloader, build_dataset
+from mmpose.datasets import build_dataloader
+
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 from models import build_posenet
+from datasets import build_dataset
 
 
 def parse_args():
