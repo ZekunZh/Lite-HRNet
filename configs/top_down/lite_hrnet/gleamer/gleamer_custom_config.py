@@ -169,6 +169,10 @@ data_root = 'data/gleamer'
 data = dict(
     samples_per_gpu=64,
     workers_per_gpu=16,
+    pin_memory=True,
+    train_dataloader=dict(
+      prefetch_factor=4,    # 2 * num_workers samples prefetched across all workers
+    ),
     train=dict(
         type='TopDownGleamerDataset',
         ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_train_coco.json',
