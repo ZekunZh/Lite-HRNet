@@ -129,7 +129,7 @@ train_pipeline = [
     dict(
         type='TopDownGetRandomScaleRotation', rot_factor=30,
         scale_factor=0.25),
-    dict(type='TopDownGetRandomRotation90'),
+    # dict(type='TopDownGetRandomRotation90'),
     dict(type='TopDownAffine'),
     dict(type='ToTensor'),
     dict(
