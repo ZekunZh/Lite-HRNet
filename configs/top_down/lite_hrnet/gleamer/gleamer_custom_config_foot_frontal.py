@@ -76,7 +76,7 @@ model = dict(
         shift_heatmap=True,
         unbiased_decoding=False,
         modulate_kernel=11),
-    loss_pose=dict(type='JointsMSELoss', use_target_weight=False))
+    loss_pose=dict(type='JointsMSELoss', use_target_weight=True))
 
 data_cfg = dict(
     # image_size=[192, 256],  # TODO: inverse image size since profile foot usually has width > height
@@ -126,7 +126,7 @@ val_data_cfg = dict(
 
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    # dict(type='TopDownRandomFlip', flip_prob=0.5),
+    dict(type='TopDownRandomFlip', flip_prob=0.5),
     dict(
         type='TopDownGetRandomScaleRotation', rot_factor=30,
         scale_factor=0.25),
