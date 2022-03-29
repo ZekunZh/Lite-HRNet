@@ -126,11 +126,7 @@ val_data_cfg = dict(
 
 train_pipeline = [
     dict(type='LoadImageFromFile'),
-    dict(type='TopDownRandomFlip', flip_prob=0.5),
-    dict(
-        type='TopDownHalfBodyTransform',
-        num_joints_half_body=8,
-        prob_half_body=0.3),
+    # dict(type='TopDownRandomFlip', flip_prob=0.5),
     dict(
         type='TopDownGetRandomScaleRotation', rot_factor=30,
         scale_factor=0.25),
