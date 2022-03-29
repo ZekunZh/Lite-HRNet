@@ -30,7 +30,7 @@ class TopDownGleamerDataset(TopDownCocoDataset):
                 'dataset_info is missing. '
                 'Check https://github.com/open-mmlab/mmpose/pull/663 '
                 'for details.', DeprecationWarning)
-            cfg = Config.fromfile('configs/_base_/datasets/gleamer_dataset.py')
+            cfg = Config.fromfile('configs/_base_/datasets/gleamer_dataset_foot_frontal.py')
             dataset_info = cfg._cfg_dict['dataset_info']
 
         super().__init__(
