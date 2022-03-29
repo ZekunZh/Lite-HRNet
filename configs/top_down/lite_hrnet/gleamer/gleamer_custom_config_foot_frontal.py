@@ -76,7 +76,7 @@ model = dict(
         shift_heatmap=True,
         unbiased_decoding=False,
         modulate_kernel=11),
-    loss_pose=dict(type='JointsMSELoss', use_target_weight=True))
+    loss_pose=dict(type='JointsMSELoss', use_target_weight=False))
 
 data_cfg = dict(
     # image_size=[192, 256],  # TODO: inverse image size since profile foot usually has width > height
