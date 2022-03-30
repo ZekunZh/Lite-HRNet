@@ -10,9 +10,14 @@ optimizer = dict(
     type='Adam',
     lr=2e-3,
 )
+# optimizer_config = dict(
+#     type="GradientCumulativeOptimizerHook",
+#     cumulative_iters=64,
+#     grad_clip=None,
+# )
 optimizer_config = dict(
-    type="GradientCumulativeOptimizerHook",
-    cumulative_iters=64,
+    type="GradientCumulativeFp16OptimizerHook",
+    cumulative_iters=32,
     grad_clip=None,
 )
 
@@ -174,7 +179,7 @@ val_pipeline = [
 test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
-    samples_per_gpu=1,
+    samples_per_gpu=2,
     workers_per_gpu=4,
     pin_memory=True,
     train_dataloader=dict(
