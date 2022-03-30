@@ -66,6 +66,7 @@ def parse_args():
         '--autoscale-lr',
         action='store_true',
         help='automatically scale lr with the number of gpus')
+    parser.add_argument("--xp-name", type=str, default="keypoints")
     args = parser.parse_args()
     if 'LOCAL_RANK' not in os.environ:
         os.environ['LOCAL_RANK'] = str(args.local_rank)
@@ -75,6 +76,12 @@ def parse_args():
 
 def main():
     args = parse_args()
+
+    from clearml import Task
+    task = Task.init(
+        project_name="Keypoints",
+        task_name=args.xp_name
+    )
 
     cfg = Config.fromfile(args.config)
 
