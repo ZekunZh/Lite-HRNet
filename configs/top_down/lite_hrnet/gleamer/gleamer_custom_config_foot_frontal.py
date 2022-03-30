@@ -10,17 +10,15 @@ optimizer = dict(
     type='Adam',
     lr=2e-3,
 )
-# optimizer_config = dict(grad_clip=None)
 optimizer_config = dict(
     type="GradientCumulativeOptimizerHook",
-    cumulative_iters=8,
+    cumulative_iters=64,
     grad_clip=None,
 )
 
 # learning policy
 lr_config = dict(
     policy='step',
-    # warmup=None,
     warmup='linear',
     warmup_iters=500,
     warmup_ratio=0.001,
@@ -87,10 +85,12 @@ data_cfg = dict(
     # heatmap_size=[48, 64],
     # image_size=[768, 1024],
     # heatmap_size=[192, 256],
-    image_size=[1152, 1536],
-    heatmap_size=[288, 384],
+    # image_size=[1152, 1536],
+    # heatmap_size=[288, 384],
     # image_size=[1536, 2048],
     # heatmap_size=[384, 512],
+    image_size=[1920, 2560],
+    heatmap_size=[480, 640],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -110,10 +110,12 @@ val_data_cfg = dict(
     # heatmap_size=[48, 64],
     # image_size=[768, 1024],
     # heatmap_size=[192, 256],
-    image_size=[1152, 1536],
-    heatmap_size=[288, 384],
+    # image_size=[1152, 1536],
+    # heatmap_size=[288, 384],
     # image_size=[1536, 2048],
     # heatmap_size=[384, 512],
+    image_size=[1920, 2560],
+    heatmap_size=[480, 640],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -172,11 +174,11 @@ val_pipeline = [
 test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
-    samples_per_gpu=2,
+    samples_per_gpu=1,
     workers_per_gpu=4,
     pin_memory=True,
     train_dataloader=dict(
-      prefetch_factor=4,    # 2 * num_workers samples prefetched across all workers
+      prefetch_factor=2,    # 2 * num_workers samples prefetched across all workers
     ),
     train=dict(
         type='TopDownGleamerDataset',
