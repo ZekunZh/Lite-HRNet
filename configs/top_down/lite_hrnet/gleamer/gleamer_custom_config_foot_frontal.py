@@ -10,7 +10,13 @@ optimizer = dict(
     type='Adam',
     lr=2e-3,
 )
-optimizer_config = dict(grad_clip=None)
+# optimizer_config = dict(grad_clip=None)
+optimizer_config = dict(
+    type="GradientCumulativeOptimizerHook",
+    cumulative_iters=8,
+    grad_clip=None,
+)
+
 # learning policy
 lr_config = dict(
     policy='step',
