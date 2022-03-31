@@ -12,6 +12,7 @@ optimizer = dict(
 )
 optimizer_config = dict(
     type="Fp16OptimizerHook",
+    loss_scale="dynamic",
     grad_clip=None,
 )
 # learning policy
