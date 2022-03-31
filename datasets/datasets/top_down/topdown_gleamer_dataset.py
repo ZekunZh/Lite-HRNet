@@ -1,6 +1,7 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import warnings
-from typing import List, Literal
+from typing import List
+from typing_extensions import Literal
 
 import os
 

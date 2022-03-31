@@ -10,7 +10,10 @@ optimizer = dict(
     type='Adam',
     lr=2e-3,
 )
-optimizer_config = dict(grad_clip=None)
+optimizer_config = dict(
+    type="Fp16OptimizerHook",
+    grad_clip=None,
+)
 # learning policy
 lr_config = dict(
     policy='step',
@@ -82,10 +85,10 @@ data_cfg = dict(
     # heatmap_size=[48, 64],
     # image_size=[768, 1024],
     # heatmap_size=[192, 256],
-    # image_size=[1152, 1536],
-    # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[384, 512],
+    image_size=[1152, 1536],
+    heatmap_size=[288, 384],
+    # image_size=[1536, 2048],
+    # heatmap_size=[384, 512],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -105,10 +108,10 @@ val_data_cfg = dict(
     # heatmap_size=[48, 64],
     # image_size=[768, 1024],
     # heatmap_size=[192, 256],
-    # image_size=[1152, 1536],
-    # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[384, 512],
+    image_size=[1152, 1536],
+    heatmap_size=[288, 384],
+    # image_size=[1536, 2048],
+    # heatmap_size=[384, 512],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -126,10 +129,6 @@ val_data_cfg = dict(
 train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='TopDownRandomFlip', flip_prob=0.5),
-    dict(
-        type='TopDownHalfBodyTransform',
-        num_joints_half_body=8,
-        prob_half_body=0.3),
     dict(
         type='TopDownGetRandomScaleRotation', rot_factor=30,
         scale_factor=0.25),
@@ -179,18 +178,21 @@ data = dict(
     ),
     train=dict(
         type='TopDownGleamerDataset',
+        task='foot_profile',
         ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_train_coco.json',
         img_prefix=f'{data_root}/train/',
         data_cfg=data_cfg,
         pipeline=train_pipeline),
     val=dict(
         type='TopDownGleamerDataset',
+        task='foot_profile',
         ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_test_coco.json',
         img_prefix=f'{data_root}/test/',
         data_cfg=val_data_cfg,
         pipeline=val_pipeline),
     test=dict(
         type='TopDownGleamerDataset',
+        task='foot_profile',
         ann_file=f'{data_root}/annotations/2022-02-16T17h06m26s_profile_foot_test_coco.json',
         img_prefix=f'{data_root}/test/',
         data_cfg=val_data_cfg,
