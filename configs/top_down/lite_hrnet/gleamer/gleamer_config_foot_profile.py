@@ -11,7 +11,9 @@ optimizer = dict(
     lr=2e-3,
 )
 optimizer_config = dict(
-    type="OptimizerHook",
+    type="GradientCumulativeFp16OptimizerHook",
+    cumulative_iters=4,
+    loss_scale="dynamic",
     grad_clip=None,
 )
 # learning policy
@@ -170,7 +172,7 @@ val_pipeline = [
 test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
-    samples_per_gpu=2,
+    samples_per_gpu=6,
     workers_per_gpu=4,
     pin_memory=True,
     train_dataloader=dict(
