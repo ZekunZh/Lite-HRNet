@@ -25,7 +25,7 @@ class TopDownGleamerDataset(TopDownCocoDataset):
             pipeline: List[dict],
             dataset_info: str = None,
             test_mode: bool = False,
-            task: Literal["foot_profile", "foot_frontal"] = None,
+            task: Literal["foot_profile", "foot_frontal", "5_incidences"] = None,
     ):
         if dataset_info is None:
             warnings.warn(
@@ -39,6 +39,7 @@ class TopDownGleamerDataset(TopDownCocoDataset):
             task_to_cfg_file = {
                 "foot_profile": "configs/_base_/datasets/gleamer_dataset_foot_profile.py",
                 "foot_frontal": "configs/_base_/datasets/gleamer_dataset_foot_frontal.py",
+                "5incidences": "configs/_base_/datasets/gleamer_dataset_5incidences.py",
             }
             cfg = Config.fromfile(task_to_cfg_file[task])
             dataset_info = cfg._cfg_dict['dataset_info']
