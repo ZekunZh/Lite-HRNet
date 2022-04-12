@@ -2,6 +2,7 @@
 import os
 import warnings
 from collections import OrderedDict, defaultdict
+from pathlib import Path
 
 import json_tricks as json
 import numpy as np
@@ -226,7 +227,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
               f'low score@{self.det_bbox_thr}: {bbox_id}')
         return kpt_db
 
-    def evaluate(self, outputs, res_folder, metric='mAP', **kwargs):
+    def evaluate(self, outputs, res_file, metric='mAP', **kwargs):
         """Evaluate coco keypoint results. The pose prediction results will be
         saved in ``${res_folder}/result_keypoints.json``.
 
@@ -247,7 +248,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
                     /000000393226.jpg']
                 - heatmap (np.ndarray[N, K, H, W]): model output heatmap
                 - bbox_id (list(int)).
-            res_folder (str): Path of directory to save the results.
+            res_file (str): Path of file to save the results.
             metric (str | list[str]): Metric to be performed. Defaults: 'mAP'.
 
         Returns:
@@ -259,7 +260,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
             if metric not in allowed_metrics:
                 raise KeyError(f'metric {metric} is not supported')
 
-        res_file = os.path.join(res_folder, 'result_keypoints.json')
+        res_file = Path(res_file).resolve()
 
         kpts = defaultdict(list)
 

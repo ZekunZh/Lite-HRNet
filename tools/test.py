@@ -134,11 +134,7 @@ def main():
     eval_config = merge_configs(eval_config, dict(metric=args.eval))
 
     if rank == 0:
-        if args.out:
-            print(f'\nwriting results to {args.out}')
-            mmcv.dump(outputs, args.out)
-
-        print(dataset.evaluate(outputs, args.work_dir, **eval_config))
+        print(dataset.evaluate(outputs, args.out, **eval_config))
 
 
 if __name__ == '__main__':
