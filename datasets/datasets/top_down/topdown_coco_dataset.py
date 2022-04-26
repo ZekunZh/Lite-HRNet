@@ -3,6 +3,7 @@ import os
 import warnings
 from collections import OrderedDict, defaultdict
 from pathlib import Path
+from typing import List
 
 import json_tricks as json
 import numpy as np
@@ -10,6 +11,7 @@ from mmcv import Config
 from xtcocotools.cocoeval import COCOeval
 
 from mmpose.core.post_processing import oks_nms, soft_oks_nms
+from mmpose.datasets import DatasetInfo
 from ...builder import DATASETS
 from mmpose.datasets.datasets.base import Kpt2dSviewRgbImgTopDownDataset
 
@@ -71,6 +73,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
                 'for details.', DeprecationWarning)
             cfg = Config.fromfile('configs/_base_/datasets/coco.py')
             dataset_info = cfg._cfg_dict['dataset_info']
+        self.dataset_info = DatasetInfo(dataset_info)
 
         super().__init__(
             ann_file,
