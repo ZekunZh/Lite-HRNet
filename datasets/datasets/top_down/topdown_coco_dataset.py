@@ -230,7 +230,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
               f'low score@{self.det_bbox_thr}: {bbox_id}')
         return kpt_db
 
-    def evaluate(self, outputs, res_file, metric='mAP', **kwargs):
+    def evaluate(self, outputs, res_folder, metric='mAP', tag=None, **kwargs):
         """Evaluate coco keypoint results. The pose prediction results will be
         saved in ``${res_folder}/result_keypoints.json``.
 
@@ -251,7 +251,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
                     /000000393226.jpg']
                 - heatmap (np.ndarray[N, K, H, W]): model output heatmap
                 - bbox_id (list(int)).
-            res_file (str): Path of file to save the results.
+            res_folder (str): Path of folder to save the results.
             metric (str | list[str]): Metric to be performed. Defaults: 'mAP'.
 
         Returns:
@@ -263,7 +263,8 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
             if metric not in allowed_metrics:
                 raise KeyError(f'metric {metric} is not supported')
 
-        res_file = Path(res_file).resolve()
+        res_name = f"result_keypoints_{tag}.json" if tag else "result_keypoints.json"
+        res_file = Path(res_folder).resolve() / res_name
 
         kpts = defaultdict(list)
 

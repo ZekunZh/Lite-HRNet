@@ -24,7 +24,8 @@ def parse_args():
     parser = argparse.ArgumentParser(description='mmpose test model')
     parser.add_argument('config', help='test config file path')
     parser.add_argument('checkpoint', help='checkpoint file')
-    parser.add_argument('--out', help='output result file')
+    parser.add_argument('--out', help='output result folder')
+    parser.add_argument('--tag', default=None, type=str, help='output result tag')
     parser.add_argument(
         '--fuse-conv-bn',
         action='store_true',
@@ -134,7 +135,7 @@ def main():
     eval_config = merge_configs(eval_config, dict(metric=args.eval))
 
     if rank == 0:
-        print(dataset.evaluate(outputs, args.out, **eval_config))
+        print(dataset.evaluate(outputs, res_folder=args.out, tag=args.tag, **eval_config))
 
 
 if __name__ == '__main__':
