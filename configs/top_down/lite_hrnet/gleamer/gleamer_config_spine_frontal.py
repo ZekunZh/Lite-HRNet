@@ -22,11 +22,11 @@ lr_config = dict(
     warmup='linear',
     warmup_iters=500,
     warmup_ratio=0.001,
-    # step=[170, 200],
-    step=[40, 47]
+    step=[170, 200],
+    # step=[40, 47]
 )
-# total_epochs = 210
-total_epochs = 50
+total_epochs = 210
+# total_epochs = 50
 log_config = dict(
     interval=10,
     hooks=[dict(type='TextLoggerHook'),
