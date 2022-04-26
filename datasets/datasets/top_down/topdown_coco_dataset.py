@@ -264,7 +264,8 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
                 raise KeyError(f'metric {metric} is not supported')
 
         res_name = f"result_keypoints_{tag}.json" if tag else "result_keypoints.json"
-        res_file = Path(res_folder).resolve() / res_name
+        res_file = str(Path(res_folder).resolve() / res_name)
+        print(f"\nSaving evaluate result to {res_file}")
 
         kpts = defaultdict(list)
 

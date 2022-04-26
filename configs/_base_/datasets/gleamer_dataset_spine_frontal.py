@@ -86,6 +86,6 @@ dataset_info = dict(
     },
     skeleton_info={
     },
-    joint_weights=[1.0] * 54,
-    sigmas=[0.01] * 54,
+    joint_weights=[1.0] * 76,
+    sigmas=[0.01] * 76,
 )
