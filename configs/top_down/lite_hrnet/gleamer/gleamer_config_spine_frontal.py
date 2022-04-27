@@ -81,17 +81,10 @@ model = dict(
     loss_pose=dict(type='JointsMSELoss', use_target_weight=True))
 
 data_cfg = dict(
-    # image_size=[192, 256],  # TODO: inverse image size since profile foot usually has width > height
-    # heatmap_size=[48, 64],
-    # image_size=[768, 1024],
-    # heatmap_size=[192, 256],
-    # image_size=[1152, 1536],
-    # heatmap_size=[288, 384],
-    image_size=[1536, 1152],
-    heatmap_size=[384, 288],
-
-    # image_size=[1536, 2048],
-    # heatmap_size=[384, 512],
+    # image_size=[1536, 1152],
+    # heatmap_size=[384, 288],
+    image_size=[1152, 1536],
+    heatmap_size=[288, 384],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -107,16 +100,10 @@ data_cfg = dict(
 )
 
 val_data_cfg = dict(
-    # image_size=[192, 256],
-    # heatmap_size=[48, 64],
-    # image_size=[768, 1024],
-    # heatmap_size=[192, 256],
-    # image_size=[1152, 1536],
-    # heatmap_size=[288, 384],
-    image_size=[1536, 1152],
-    heatmap_size=[384, 288],
-    # image_size=[1536, 2048],
-    # heatmap_size=[384, 512],
+    # image_size=[1536, 1152],
+    # heatmap_size=[384, 288],
+    image_size=[1152, 1536],
+    heatmap_size=[288, 384],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -144,7 +131,7 @@ train_pipeline = [
         type='NormalizeTensor',
         mean=[0.485, 0.456, 0.406],
         std=[0.229, 0.224, 0.225]),
-    dict(type='TopDownGenerateTarget', sigma=2),
+    dict(type='TopDownGenerateTarget', sigma=0.2),
     dict(
         type='Collect',
         keys=['img', 'target', 'target_weight'],
