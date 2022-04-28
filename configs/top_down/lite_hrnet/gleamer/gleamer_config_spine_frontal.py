@@ -6,6 +6,7 @@ workflow = [('train', 1)]
 checkpoint_config = dict(interval=10)
 evaluation = dict(interval=10, metric='mAP')
 
+
 optimizer = dict(
     type='Adam',
     lr=2e-3,
@@ -85,8 +86,10 @@ data_cfg = dict(
     # heatmap_size=[384, 288],
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[384, 512],
+    # image_size=[1536, 2048],
+    # heatmap_size=[384, 512],
+    image_size=[2304, 3072],
+    heatmap_size=[576, 768],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -106,8 +109,10 @@ val_data_cfg = dict(
     # heatmap_size=[384, 288],
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[384, 512],
+    # image_size=[1536, 2048],
+    # heatmap_size=[384, 512],
+    image_size=[2304, 3072],
+    heatmap_size=[576, 768],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
