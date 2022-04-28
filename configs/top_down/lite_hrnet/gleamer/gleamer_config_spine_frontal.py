@@ -84,12 +84,10 @@ model = dict(
     loss_pose=dict(type='JointsMSELoss', use_target_weight=True))
 
 data_cfg = dict(
-    # image_size=[1536, 1152],
-    # heatmap_size=[384, 288],
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[1536, 2048],
+    image_size=[1152, 1536],
+    heatmap_size=[1152, 1536],
     # image_size=[2304, 3072],
     # heatmap_size=[576, 768],
     num_output_channels=channel_cfg['num_output_channels'],
@@ -107,12 +105,10 @@ data_cfg = dict(
 )
 
 val_data_cfg = dict(
-    # image_size=[1536, 1152],
-    # heatmap_size=[384, 288],
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[1536, 2048],
+    image_size=[1152, 1536],
+    heatmap_size=[1152, 1536],
     # image_size=[2304, 3072],
     # heatmap_size=[576, 768],
     num_output_channels=channel_cfg['num_output_channels'],
@@ -173,7 +169,7 @@ val_pipeline = [
 test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
-    samples_per_gpu=2,
+    samples_per_gpu=1,
     workers_per_gpu=4,
     pin_memory=True,
     train_dataloader=dict(
