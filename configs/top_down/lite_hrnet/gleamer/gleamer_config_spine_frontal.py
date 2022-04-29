@@ -69,9 +69,9 @@ model = dict(
         type='TopDownSimpleHead',
         in_channels=40,
         out_channels=channel_cfg['num_output_channels'],
-        num_deconv_layers=1,
-        num_deconv_filters=(256,),
-        num_deconv_kernels=(4,),
+        num_deconv_layers=2,
+        num_deconv_filters=(256, 256),
+        num_deconv_kernels=(4, 4),
         extra=dict(final_conv_kernel=1, ),
     ),
     train_cfg=dict(),
@@ -81,13 +81,13 @@ model = dict(
         shift_heatmap=True,
         unbiased_decoding=False,
         modulate_kernel=11),
-    loss_pose=dict(type='JointsMSELoss', use_target_weight=True))
+    loss_pose=dict(type='JointsMSELoss', use_target_weight=True, loss_weight=4.))
 
 data_cfg = dict(
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
     image_size=[1152, 1536],
-    heatmap_size=[576, 768],
+    heatmap_size=[1152, 1536],
     # image_size=[2304, 3072],
     # heatmap_size=[576, 768],
     num_output_channels=channel_cfg['num_output_channels'],
@@ -108,7 +108,7 @@ val_data_cfg = dict(
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
     image_size=[1152, 1536],
-    heatmap_size=[576, 768],
+    heatmap_size=[1152, 1536],
     # image_size=[2304, 3072],
     # heatmap_size=[576, 768],
     num_output_channels=channel_cfg['num_output_channels'],
@@ -169,7 +169,7 @@ val_pipeline = [
 test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
-    samples_per_gpu=4,
+    samples_per_gpu=1,
     workers_per_gpu=4,
     pin_memory=True,
     train_dataloader=dict(
