@@ -129,7 +129,7 @@ train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='TopDownRandomFlip', flip_prob=0.5),
     dict(
-        type='TopDownGetRandomScaleRotation', rot_factor=30,
+        type='TopDownGetRandomScaleRotation', rot_factor=60,
         scale_factor=0.25),
     # dict(type='TopDownGetRandomRotation90'),
     dict(type='TopDownAffine'),
