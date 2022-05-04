@@ -77,9 +77,9 @@ model = dict(
     train_cfg=dict(),
     test_cfg=dict(
         flip_test=True,
-        post_process=True,
+        post_process="unbiased",
         shift_heatmap=True,
-        unbiased_decoding=False,
+        use_udp=False,
         modulate_kernel=11),
     loss_pose=dict(type='JointsMSELoss', use_target_weight=True, loss_weight=1.))
 
@@ -129,7 +129,7 @@ train_pipeline = [
     dict(type='LoadImageFromFile'),
     dict(type='TopDownRandomFlip', flip_prob=0.5),
     dict(
-        type='TopDownGetRandomScaleRotation', rot_factor=60,
+        type='TopDownGetRandomScaleRotation', rot_factor=30,
         scale_factor=0.25),
     # dict(type='TopDownGetRandomRotation90'),
     dict(type='TopDownAffine'),
