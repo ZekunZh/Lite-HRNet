@@ -230,7 +230,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
               f'low score@{self.det_bbox_thr}: {bbox_id}')
         return kpt_db
 
-    def evaluate(self, outputs, res_folder, metric='mAP', tag=None, **kwargs):
+    def evaluate(self, outputs, res_folder, metric='mAP', **kwargs):
         """Evaluate coco keypoint results. The pose prediction results will be
         saved in ``${res_folder}/result_keypoints.json``.
 
@@ -263,6 +263,7 @@ class TopDownCocoDataset(Kpt2dSviewRgbImgTopDownDataset):
             if metric not in allowed_metrics:
                 raise KeyError(f'metric {metric} is not supported')
 
+        tag = kwargs.pop("tag", None)
         res_name = f"result_keypoints_{tag}.json" if tag else "result_keypoints.json"
         res_file = str(Path(res_folder).resolve() / res_name)
         print(f"\nSaving evaluate result to {res_file}")
