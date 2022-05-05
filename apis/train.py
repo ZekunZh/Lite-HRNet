@@ -5,7 +5,7 @@ import numpy as np
 import torch
 import torch.distributed as dist
 from mmcv.parallel import MMDataParallel, MMDistributedDataParallel
-from mmcv.runner import (DistSamplerSeedHook, EpochBasedRunner, OptimizerHook,
+from mmcv.runner import (DistSamplerSeedHook, OptimizerHook,
                          get_dist_info)
 
 from mmpose.core import DistEvalHook, EvalHook, build_optimizers
@@ -21,6 +21,7 @@ except ImportError:
         'v0.15.0. Please install mmcv>=1.1.4', DeprecationWarning)
     from mmpose.core import Fp16OptimizerHook
 
+from runner import GleamerEpochBasedRunner
 
 def init_random_seed(seed=None, device='cuda'):
     """Initialize random seed.
@@ -136,7 +137,7 @@ def train_model(model,
     # build runner
     optimizer = build_optimizers(model, cfg.optimizer)
 
-    runner = EpochBasedRunner(
+    runner = GleamerEpochBasedRunner(
         model,
         optimizer=optimizer,
         work_dir=cfg.work_dir,
