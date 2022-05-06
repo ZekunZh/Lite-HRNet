@@ -41,6 +41,11 @@ channel_cfg = dict(
     ],
     inference_channel=list(range(74)))
 
+sigma_cfg = dict(
+    start=16.,
+    end=2.,
+)
+
 # model settings
 model = dict(
     type='TopDown',

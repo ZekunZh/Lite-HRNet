@@ -190,4 +190,10 @@ def train_model(model,
         runner.resume(cfg.resume_from)
     elif cfg.load_from:
         runner.load_checkpoint(cfg.load_from)
+
+    # patch for moving sigma
+    if len(data_loaders) != len(cfg.workflow):
+        data_loaders = {
+            "train": data_loaders
+        }
     runner.run(data_loaders, cfg.workflow, cfg.total_epochs)
