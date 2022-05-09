@@ -41,6 +41,11 @@ channel_cfg = dict(
     ],
     inference_channel=list(range(76)))
 
+sigma_cfg = dict(
+    start=32.,
+    end=2.,
+)
+
 # model settings
 model = dict(
     type='TopDown',
@@ -77,19 +82,19 @@ model = dict(
     train_cfg=dict(),
     test_cfg=dict(
         flip_test=True,
-        post_process="default",
+        post_process="unbiased",
         shift_heatmap=True,
-        use_udp=True,
+        use_udp=False,
         modulate_kernel=11),
     loss_pose=dict(type='JointsMSELoss', use_target_weight=True, loss_weight=1.))
 
 data_cfg = dict(
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[384, 512],
-    # image_size=[2304, 3072],
-    # heatmap_size=[576, 768],
+    # image_size=[1536, 2048],
+    # heatmap_size=[384, 512],
+    image_size=[1344, 4096],
+    heatmap_size=[336, 1024],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -107,10 +112,10 @@ data_cfg = dict(
 val_data_cfg = dict(
     # image_size=[1152, 1536],
     # heatmap_size=[288, 384],
-    image_size=[1536, 2048],
-    heatmap_size=[384, 512],
-    # image_size=[2304, 3072],
-    # heatmap_size=[576, 768],
+    # image_size=[1536, 2048],
+    # heatmap_size=[384, 512],
+    image_size=[1344, 4096],
+    heatmap_size=[336, 1024],
     num_output_channels=channel_cfg['num_output_channels'],
     num_joints=channel_cfg['dataset_joints'],
     dataset_channel=channel_cfg['dataset_channel'],
@@ -130,7 +135,7 @@ train_pipeline = [
     dict(type='TopDownRandomFlip', flip_prob=0.5),
     dict(
         type='TopDownGetRandomScaleRotation', rot_factor=30,
-        scale_factor=0.25),
+        scale_factor=0.5),
     # dict(type='TopDownGetRandomRotation90'),
     dict(type='TopDownAffine'),
     dict(type='ToTensor'),
@@ -169,7 +174,7 @@ val_pipeline = [
 test_pipeline = val_pipeline
 data_root = 'data/gleamer'
 data = dict(
-    samples_per_gpu=4,
+    samples_per_gpu=2,
     workers_per_gpu=4,
     pin_memory=True,
     train_dataloader=dict(
@@ -197,3 +202,4 @@ data = dict(
         data_cfg=val_data_cfg,
         pipeline=test_pipeline),
 )
+
