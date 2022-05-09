@@ -43,7 +43,7 @@ channel_cfg = dict(
 
 sigma_cfg = dict(
     start=32.,
-    end=1.,
+    end=4.,
 )
 
 # model settings
