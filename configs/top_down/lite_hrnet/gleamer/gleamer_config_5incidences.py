@@ -33,12 +33,17 @@ log_config = dict(
            dict(type='TensorboardLoggerHook')])
 
 channel_cfg = dict(
-    num_output_channels=54,
-    dataset_joints=54,
+    num_output_channels=56,
+    dataset_joints=56,
     dataset_channel=[
-       list(range(54))
+       list(range(56))
     ],
-    inference_channel=list(range(54)))
+    inference_channel=list(range(56)))
+
+sigma_cfg = dict(
+    start=2.,
+    end=2.,
+)
 
 # model settings
 model = dict(
@@ -179,21 +184,21 @@ data = dict(
     train=dict(
         type='TopDownGleamerDataset',
         task='5incidences',
-        ann_file=f'{data_root}/annotations/2022-04-08T14h56m38s_5incidences_train_coco.json',
+        ann_file=f'{data_root}/annotations/2022-05-23T16h49m22s_5incidences_train_v3_coco.json',
         img_prefix=f'{data_root}/train/',
         data_cfg=data_cfg,
         pipeline=train_pipeline),
     val=dict(
         type='TopDownGleamerDataset',
         task='5incidences',
-        ann_file=f'{data_root}/annotations/2022-04-08T14h56m40s_5incidences_test_coco.json',
+        ann_file=f'{data_root}/annotations/2022-05-23T16h50m02s_5incidences_test_v3_coco.json',
         img_prefix=f'{data_root}/test/',
         data_cfg=val_data_cfg,
         pipeline=val_pipeline),
     test=dict(
         type='TopDownGleamerDataset',
         task='5incidences',
-        ann_file=f'{data_root}/annotations/2022-04-12T10h06m34s_5incidences_test_v2_coco.json',
+        ann_file=f'{data_root}/annotations/2022-05-23T16h50m02s_5incidences_test_v3_coco.json',
         img_prefix=f'{data_root}/test/',
         data_cfg=val_data_cfg,
         pipeline=test_pipeline),
