@@ -24,10 +24,9 @@ lr_config = dict(
     warmup_iters=500,
     warmup_ratio=0.001,
     step=[170, 200],
-    # step=[40, 47]
 )
 total_epochs = 210
-# total_epochs = 50
+
 log_config = dict(
     interval=10,
     hooks=[dict(type='TextLoggerHook'),
@@ -42,7 +41,7 @@ channel_cfg = dict(
     inference_channel=list(range(76)))
 
 sigma_cfg = dict(
-    start=32.,
+    start=2.,
     end=2.,
 )
 
@@ -82,9 +81,9 @@ model = dict(
     train_cfg=dict(),
     test_cfg=dict(
         flip_test=True,
-        post_process="unbiased",
+        post_process=True,
         shift_heatmap=True,
-        use_udp=False,
+        unbiased_decoding=False,
         modulate_kernel=11),
     loss_pose=dict(type='JointsMSELoss', use_target_weight=True, loss_weight=1.))
 
@@ -183,21 +182,21 @@ data = dict(
     train=dict(
         type='TopDownGleamerDataset',
         task='spine_frontal',
-        ann_file=f'{data_root}/annotations/2022-04-29T14h19m20s_frontal_spine_train_v3.1_coco.json',
+        ann_file=f'{data_root}/annotations/2022-05-23T16h50m17s_frontal_spine_train_v4_coco.json',
         img_prefix=f'{data_root}/train/',
         data_cfg=data_cfg,
         pipeline=train_pipeline),
     val=dict(
         type='TopDownGleamerDataset',
         task='spine_frontal',
-        ann_file=f'{data_root}/annotations/2022-04-29T14h19m20s_frontal_spine_val_v3.1_coco.json',
-        img_prefix=f'{data_root}/test/',
+        ann_file=f'{data_root}/annotations/2022-05-23T16h50m25s_frontal_spine_val_v4_coco.json',
+        img_prefix=f'{data_root}/train/',
         data_cfg=val_data_cfg,
         pipeline=val_pipeline),
     test=dict(
         type='TopDownGleamerDataset',
         task='spine_frontal',
-        ann_file=f'{data_root}/annotations/2022-04-29T14h19m21s_frontal_spine_test_v3.1_coco.json',
+        ann_file=f'{data_root}/annotations/2022-05-23T16h50m27s_frontal_spine_test_v4_coco.json',
         img_prefix=f'{data_root}/test/',
         data_cfg=val_data_cfg,
         pipeline=test_pipeline),
