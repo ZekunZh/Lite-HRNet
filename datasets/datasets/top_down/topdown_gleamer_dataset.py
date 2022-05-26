@@ -39,9 +39,10 @@ class TopDownGleamerDataset(TopDownCocoDataset):
             task_to_cfg_file = {
                 "foot_profile": "configs/_base_/datasets/gleamer_dataset_foot_profile.py",
                 "foot_frontal": "configs/_base_/datasets/gleamer_dataset_foot_frontal.py",
-                "5incidences": "configs/_base_/datasets/gleamer_dataset_5incidences.py",
                 "spine_frontal": "configs/_base_/datasets/gleamer_dataset_spine_frontal.py",
                 "spine_frontal_cropped": "configs/_base_/datasets/gleamer_dataset_spine_frontal_cropped.py",
+                "5incidences": "configs/_base_/datasets/gleamer_dataset_5incidences.py",
+                "6incidences": "configs/_base_/datasets/gleamer_dataset_6incidences.py",
             }
             cfg = Config.fromfile(task_to_cfg_file[task])
             dataset_info = cfg._cfg_dict['dataset_info']

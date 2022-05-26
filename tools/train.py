@@ -154,13 +154,17 @@ def main():
     # datasets = [build_dataset(cfg.data.train)]
     datasets = []
     sigma_start, sigma_end = cfg.sigma_cfg.start, cfg.sigma_cfg.end
-    for i in range(cfg.total_epochs):
+    if sigma_start == sigma_end:
         train_cfg = copy.deepcopy(cfg.data.train)
-        current_sigma = sigma_start + (sigma_end - sigma_start) * i / cfg.total_epochs
-        generate_target_cfg = next(step for step in train_cfg["pipeline"] if step["type"] == "TopDownGenerateTarget")
-        generate_target_cfg["sigma"] = current_sigma
-        logger.info(f"sigma for epoch {i}: {current_sigma}")
         datasets.append(build_dataset(train_cfg))
+    else:
+        for i in range(cfg.total_epochs):
+            train_cfg = copy.deepcopy(cfg.data.train)
+            current_sigma = sigma_start + (sigma_end - sigma_start) * i / cfg.total_epochs
+            generate_target_cfg = next(step for step in train_cfg["pipeline"] if step["type"] == "TopDownGenerateTarget")
+            generate_target_cfg["sigma"] = current_sigma
+            logger.info(f"sigma for epoch {i}: {current_sigma}")
+            datasets.append(build_dataset(train_cfg))
 
 
     if len(cfg.workflow) == 2:
